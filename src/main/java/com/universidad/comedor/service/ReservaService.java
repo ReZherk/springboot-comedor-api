@@ -29,13 +29,13 @@ public class ReservaService {
     Estudiante est = optEst.get();
     LocalDate hoy = LocalDate.now();
 
-    // 💡 CAMBIOS APLICADOS AQUÍ
+    // ✅ Validar solo una reserva por turno al día
     if (reservaRepo.existsByIdEstudianteAndFechaReservaAndIdTurno(est.getId_estudiante(), hoy, idTurno))
-      return "Ya reservaste en este turno hoy";
+      return "Ya reservaste en este turno hoy. Solo se permite una reserva por turno.";
 
-    if (reservaRepo.existsByIdEstudianteAndFechaReserva(est.getId_estudiante(), hoy))
-      return "Solo puedes hacer una reserva por día";
+    // ❌ Eliminado: restricción incorrecta de una sola reserva por día
 
+    // ✅ Verificar límite de raciones
     long actuales = reservaRepo.countByIdFacultadAndIdEscuelaAndIdTurnoAndFechaReserva(
         est.getId_facultad(), est.getId_escuela(), idTurno, hoy);
 
@@ -48,6 +48,7 @@ public class ReservaService {
     if (actuales >= limite.getRaciones_max())
       return "Ya se agotaron las raciones para este turno";
 
+    // ✅ Crear reserva con setters estilo camelCase
     Reserva reserva = new Reserva();
     reserva.setIdEstudiante(est.getId_estudiante());
     reserva.setIdFacultad(est.getId_facultad());

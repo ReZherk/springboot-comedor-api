@@ -13,7 +13,7 @@ public class WebConfig {
       @Override
       public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-            .allowedOrigins("http://127.0.0.1:5501")
+            .allowedOrigins("http://127.0.0.1:5502")
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedHeaders("*")
             .allowCredentials(true); // si luego necesitas incluir cookies o Authorization
