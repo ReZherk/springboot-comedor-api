@@ -28,4 +28,7 @@ public class Estudiante {
  private String dni;
 
  private String correo_institucional;
+
+ @Column(length = 20)
+ private String rol;
 }

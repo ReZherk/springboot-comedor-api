@@ -39,7 +39,8 @@ public class ReservaService {
     long actuales = reservaRepo.countByIdFacultadAndIdEscuelaAndIdTurnoAndFechaReserva(
         est.getId_facultad(), est.getId_escuela(), idTurno, hoy);
 
-    LimiteRacionesKey key = new LimiteRacionesKey(est.getId_facultad(), est.getId_escuela(), idTurno);
+    LimiteRacionesKey key = new LimiteRacionesKey(est.getId_facultad(), est.getId_escuela(),
+        idTurno);
     LimiteRaciones limite = limiteRepo.findById(key).orElse(null);
 
     if (limite == null)
