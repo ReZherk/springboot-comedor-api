@@ -23,12 +23,17 @@ public class AuthController {
 
  @PostMapping("/login")
  public ResponseEntity<?> login(@RequestBody LoginRequestDTO login) {
-  Optional<Estudiante> estudiante = repo.findByCodigoAndDni(login.getCodigo(), login.getDni());
+  String codigo = login.getCodigo().trim();
+  String dni = login.getDni().trim();
+
+  Optional<Estudiante> estudiante = repo.findByCodigoAndDni(codigo, dni);
   if (estudiante.isPresent()) {
-   String token = jwtProvider.generateToken(estudiante.get().getCodigo());
-   return ResponseEntity.ok(new LoginResponseDTO(token));
+   Estudiante e = estudiante.get();
+   String token = jwtProvider.generateToken(e.getCodigo()); // ✅ sin rol
+   return ResponseEntity.ok(new LoginResponseDTO(token, e.getRol())); // ✅ devuelve rol
   } else {
    return ResponseEntity.status(401).body("Código o DNI incorrecto.");
   }
  }
+
 }

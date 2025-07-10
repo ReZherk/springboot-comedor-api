@@ -12,8 +12,10 @@ import lombok.*;
 public class Escuela {
 
  @Id
- private Long id_escuela;
+ @Column(name = "id_escuela")
+ private Long idEscuela;
 
+ @Column(name = "nom_escuela")
  private String nombre;
 
  @ManyToOne
