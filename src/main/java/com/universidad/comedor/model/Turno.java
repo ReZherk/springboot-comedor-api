@@ -10,9 +10,13 @@ import lombok.*;
 @AllArgsConstructor
 @Table(name = "Turno")
 public class Turno {
+
  @Id
  @Column(name = "id_turno")
  private Long idTurno;
+
  private String nombre;
- private int limite_global;
+
+ @Column(name = "limite_global")
+ private int limiteGlobal;
 }

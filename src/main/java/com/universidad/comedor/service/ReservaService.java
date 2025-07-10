@@ -46,7 +46,7 @@ public class ReservaService {
     if (limite == null)
       return "No hay límite configurado para tu escuela y turno";
 
-    if (actuales >= limite.getRaciones_max())
+    if (actuales >= limite.getRacionesMax())
       return "Ya se agotaron las raciones para este turno";
 
     // ✅ Crear reserva con setters estilo camelCase

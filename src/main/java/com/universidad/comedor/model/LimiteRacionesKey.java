@@ -1,13 +1,20 @@
 package com.universidad.comedor.model;
 
-import java.io.Serializable;
+import jakarta.persistence.*;
 import lombok.*;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class LimiteRacionesKey implements Serializable {
- private Long id_facultad;
- private Long id_escuela;
- private Long id_turno;
+
+ @Column(name = "id_facultad")
+ private Long idFacultad;
+
+ @Column(name = "id_escuela")
+ private Long idEscuela;
+
+ @Column(name = "id_turno")
+ private Long idTurno;
 }

@@ -10,13 +10,18 @@ import lombok.*;
 @AllArgsConstructor
 @Table(name = "Horario")
 public class Horario {
+
  @Id
- private Long id_horario;
+ @Column(name = "id_horario")
+ private Long idHorario;
 
  @ManyToOne
  @JoinColumn(name = "id_turno")
  private Turno turno;
 
- private String hora_inicio;
- private String hora_fin;
+ @Column(name = "hora_inicio")
+ private String horaInicio;
+
+ @Column(name = "hora_fin")
+ private String horaFin;
 }

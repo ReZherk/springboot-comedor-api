@@ -8,18 +8,22 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "LIMITERACIONES")
 @IdClass(LimiteRacionesKey.class)
+@Table(name = "LIMITERACIONES")
 public class LimiteRaciones {
 
  @Id
- private Long id_facultad;
+ @Column(name = "id_facultad")
+ private Long idFacultad;
 
  @Id
- private Long id_escuela;
+ @Column(name = "id_escuela")
+ private Long idEscuela;
 
  @Id
- private Long id_turno;
+ @Column(name = "id_turno")
+ private Long idTurno;
 
- private int raciones_max;
+ @Column(name = "raciones_max")
+ private int racionesMax;
 }
