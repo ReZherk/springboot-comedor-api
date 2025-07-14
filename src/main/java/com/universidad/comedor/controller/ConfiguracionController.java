@@ -18,62 +18,62 @@ import java.util.List;
 @RequestMapping("/admin/config")
 public class ConfiguracionController {
 
- @Autowired
- private TurnoRepository turnoRepo;
+  @Autowired
+  private TurnoRepository turnoRepo;
 
- @Autowired
- private LimiteRacionesRepository limiteRepo;
+  @Autowired
+  private LimiteRacionesRepository limiteRepo;
 
- @Autowired
- private HorarioRepository horarioRepo;
+  @Autowired
+  private HorarioRepository horarioRepo;
 
- // 🔄 Traer todos los turnos y sus límites
- @GetMapping("/turnos")
- public List<Turno> listarTurnos() {
-  return turnoRepo.findAll();
- }
-
- // 🔄 Traer todos los horarios por turno
- @GetMapping("/turnos/{id}/horarios")
- public List<Horario> listarHorariosPorTurno(@PathVariable Long id) {
-  return horarioRepo.findByTurnoIdTurno(id);
- }
-
- // 🔄 Traer todos los límites de raciones
- @GetMapping("/limites")
- public List<LimiteRaciones> listarLimites() {
-  return limiteRepo.findAll();
- }
-
- // ✅ Actualizar un límite global de turno
- @PutMapping("/turnos/{id}")
- public Turno actualizarTurno(@PathVariable Long id, @RequestBody TurnoDTO dto) {
-  Turno turno = turnoRepo.findById(id).orElseThrow();
-  turno.setLimiteGlobal(dto.getLimiteGlobal());
-  return turnoRepo.save(turno);
- }
-
- // ✅ Actualizar límite de raciones por escuela
- @PutMapping("/limites")
- public void actualizarLimites(@RequestBody List<LimiteRacionDTO> limites) {
-  for (LimiteRacionDTO dto : limites) {
-   LimiteRaciones lr = limiteRepo.findAll().stream()
-     .filter(l -> l.getIdFacultad().equals(dto.getIdFacultad())
-       && l.getIdEscuela().equals(dto.getIdEscuela())
-       && l.getIdTurno().equals(dto.getIdTurno()))
-     .findFirst()
-     .orElseThrow();
-   lr.setRacionesMax(dto.getRacionesMax());
-   limiteRepo.save(lr);
+  // Traer todos los turnos y sus límites
+  @GetMapping("/turnos")
+  public List<Turno> listarTurnos() {
+    return turnoRepo.findAll();
   }
- }
 
- // ✅ Actualizar horario
- @PutMapping("/horarios/{id}")
- public Horario actualizarHorario(@PathVariable Long id, @RequestBody HorarioDTO dto) {
-  Horario horario = horarioRepo.findById(id).orElseThrow();
-  horario.setHoraInicio(dto.getHoraInicio());
-  horario.setHoraFin(dto.getHoraFin());
-  return horarioRepo.save(horario);
- }
+  // Traer todos los horarios por turno
+  @GetMapping("/turnos/{id}/horarios")
+  public List<Horario> listarHorariosPorTurno(@PathVariable Long id) {
+    return horarioRepo.findByTurnoIdTurno(id);
+  }
+
+  // Traer todos los límites de raciones
+  @GetMapping("/limites")
+  public List<LimiteRaciones> listarLimites() {
+    return limiteRepo.findAll();
+  }
+
+  // ✅ Actualizar un límite global de turno
+  @PutMapping("/turnos/{id}")
+  public Turno actualizarTurno(@PathVariable Long id, @RequestBody TurnoDTO dto) {
+    Turno turno = turnoRepo.findById(id).orElseThrow();
+    turno.setLimiteGlobal(dto.getLimiteGlobal());
+    return turnoRepo.save(turno);
+  }
+
+  // ✅ Actualizar límite de raciones por escuela
+  @PutMapping("/limites")
+  public void actualizarLimites(@RequestBody List<LimiteRacionDTO> limites) {
+    for (LimiteRacionDTO dto : limites) {
+      LimiteRaciones lr = limiteRepo.findAll().stream()
+          .filter(l -> l.getIdFacultad().equals(dto.getIdFacultad())
+              && l.getIdEscuela().equals(dto.getIdEscuela())
+              && l.getIdTurno().equals(dto.getIdTurno()))
+          .findFirst()
+          .orElseThrow();
+      lr.setRacionesMax(dto.getRacionesMax());
+      limiteRepo.save(lr);
+    }
+  }
+
+  // ✅ Actualizar horario
+  @PutMapping("/horarios/{id}")
+  public Horario actualizarHorario(@PathVariable Long id, @RequestBody HorarioDTO dto) {
+    Horario horario = horarioRepo.findById(id).orElseThrow();
+    horario.setHoraInicio(dto.getHoraInicio());
+    horario.setHoraFin(dto.getHoraFin());
+    return horarioRepo.save(horario);
+  }
 }

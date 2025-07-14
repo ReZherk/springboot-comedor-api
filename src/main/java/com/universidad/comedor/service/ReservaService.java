@@ -29,18 +29,15 @@ public class ReservaService {
     Estudiante est = optEst.get();
     LocalDate hoy = LocalDate.now();
 
-    // ✅ Validar solo una reserva por turno al día
-    if (reservaRepo.existsByIdEstudianteAndFechaReservaAndIdTurno(est.getId_estudiante(), hoy, idTurno))
+    // Validar solo una reserva por turno al día
+    if (reservaRepo.existsByIdEstudianteAndFechaReservaAndIdTurno(est.getIdEstudiante(), hoy, idTurno))
       return "Ya reservaste en este turno hoy. Solo se permite una reserva por turno.";
 
-    // ❌ Eliminado: restricción incorrecta de una sola reserva por día
-
-    // ✅ Verificar límite de raciones
+    // Verificar límite de raciones
     long actuales = reservaRepo.countByIdFacultadAndIdEscuelaAndIdTurnoAndFechaReserva(
-        est.getId_facultad(), est.getId_escuela(), idTurno, hoy);
+        est.getIdFacultad(), est.getIdEscuela(), idTurno, hoy);
 
-    LimiteRacionesKey key = new LimiteRacionesKey(est.getId_facultad(), est.getId_escuela(),
-        idTurno);
+    LimiteRacionesKey key = new LimiteRacionesKey(est.getIdFacultad(), est.getIdEscuela(), idTurno);
     LimiteRaciones limite = limiteRepo.findById(key).orElse(null);
 
     if (limite == null)
@@ -49,11 +46,10 @@ public class ReservaService {
     if (actuales >= limite.getRacionesMax())
       return "Ya se agotaron las raciones para este turno";
 
-    // ✅ Crear reserva con setters estilo camelCase
     Reserva reserva = new Reserva();
-    reserva.setIdEstudiante(est.getId_estudiante());
-    reserva.setIdFacultad(est.getId_facultad());
-    reserva.setIdEscuela(est.getId_escuela());
+    reserva.setIdEstudiante(est.getIdEstudiante());
+    reserva.setIdFacultad(est.getIdFacultad());
+    reserva.setIdEscuela(est.getIdEscuela());
     reserva.setIdTurno(idTurno);
     reserva.setIdHorario(idHorario);
     reserva.setFechaReserva(hoy);
@@ -64,7 +60,7 @@ public class ReservaService {
 
   public Long getEstudianteIdPorCodigo(String codigo) {
     return estudianteRepo.findByCodigo(codigo)
-        .map(Estudiante::getId_estudiante)
+        .map(Estudiante::getIdEstudiante)
         .orElse(null);
   }
 }

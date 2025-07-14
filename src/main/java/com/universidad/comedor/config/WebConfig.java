@@ -16,7 +16,7 @@ public class WebConfig {
             .allowedOrigins("http://127.0.0.1:5502")
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedHeaders("*")
-            .allowCredentials(true); // si luego necesitas incluir cookies o Authorization
+            .allowCredentials(true);
       }
     };
   }

@@ -26,6 +26,20 @@ public class AdminController {
   return repo.save(est);
  }
 
+ @PutMapping("/estudiantes/{id}")
+ public Estudiante actualizar(@PathVariable Long id, @RequestBody Estudiante nuevo) {
+  return repo.findById(id).map(est -> {
+   est.setCodigo(nuevo.getCodigo());
+   est.setDni(nuevo.getDni());
+   est.setNombre(nuevo.getNombre());
+   est.setApellido(nuevo.getApellido());
+   est.setCorreoInstitucional(nuevo.getCorreoInstitucional());
+   est.setIdFacultad(nuevo.getIdFacultad());
+   est.setIdEscuela(nuevo.getIdEscuela());
+   return repo.save(est);
+  }).orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
+ }
+
  @DeleteMapping("/estudiantes/{id}")
  public void eliminar(@PathVariable Long id) {
   repo.deleteById(id);

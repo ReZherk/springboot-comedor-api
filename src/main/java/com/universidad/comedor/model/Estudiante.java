@@ -13,22 +13,27 @@ public class Estudiante {
 
  @Id
  @GeneratedValue(strategy = GenerationType.IDENTITY)
- private Long id_estudiante;
+ @Column(name = "id_estudiante")
+ private Long idEstudiante;
 
- private Long id_facultad;
- private Long id_escuela;
+ @Column(name = "id_facultad")
+ private Long idFacultad;
+
+ @Column(name = "id_escuela")
+ private Long idEscuela;
 
  private String nombre;
  private String apellido;
 
- @Column(unique = true)
+ @Column(name = "codigo", unique = true)
  private String codigo;
 
- @Column(length = 8)
+ @Column(name = "dni", length = 8)
  private String dni;
 
- private String correo_institucional;
+ @Column(name = "correo_institucional")
+ private String correoInstitucional;
 
- @Column(length = 20)
+ @Column(name = "rol", length = 20)
  private String rol;
 }
