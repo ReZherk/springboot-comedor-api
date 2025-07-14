@@ -1,5 +1,3 @@
-Aquí tienes un ejemplo de `README.md` profesional para tu repositorio en GitHub, orientado a tu proyecto **Comedor Universitario**, desarrollado con **Spring Boot** y base de datos **Oracle**:
-
 ---
 
 ```markdown
@@ -30,34 +28,6 @@ Facilitar la gestión de turnos, raciones y reservas en un comedor universitario
 
 ---
 
-## 📁 Estructura del Proyecto
-```
-
-comedor-universitario/
-│
-├── src/
-│ ├── main/
-│ │ ├── java/com/universidad/comedor/
-│ │ │ ├── config/ → WebConfig, CORS
-│ │ │ ├── controller/ → Controladores REST
-│ │ │ ├── dto/ → Objetos de transferencia (DTOs)
-│ │ │ ├── model/ → Entidades JPA (Estudiante, Turno, Reserva, etc.)
-│ │ │ ├── repository/ → Interfaces JpaRepository
-│ │ │ ├── security/ → Seguridad JWT
-│ │ │ └── service/ → Lógica de negocio (ReservaService)
-│ │ └── resources/
-│ │ └── application.properties → Configuración de conexión Oracle
-│
-├── frontend/
-│ └── admin.html
-│ └── admin_config.html
-│ └── reservar.html
-│ └── index_login.html
-│
-└── README.md
-
-````
-
 ---
 
 ## 📦 Instalación y Ejecución
@@ -74,7 +44,7 @@ comedor-universitario/
 ```bash
 git clone https://github.com/ReZherk/springboot-comedor-api.git
 cd springboot-comedor-api
-````
+```
 
 ### 📂 Configurar Base de Datos
 
@@ -134,5 +104,4 @@ Repositorio oficial: [github.com/ReZherk](https://github.com/ReZherk)
 
 ```
 
----
 ```
