@@ -45,7 +45,7 @@ public class ConfiguracionController {
     return limiteRepo.findAll();
   }
 
-  // ✅ Actualizar un límite global de turno
+  // Actualizar un límite global de turno
   @PutMapping("/turnos/{id}")
   public Turno actualizarTurno(@PathVariable Long id, @RequestBody TurnoDTO dto) {
     Turno turno = turnoRepo.findById(id).orElseThrow();
@@ -53,7 +53,7 @@ public class ConfiguracionController {
     return turnoRepo.save(turno);
   }
 
-  // ✅ Actualizar límite de raciones por escuela
+  // Actualizar límite de raciones por escuela
   @PutMapping("/limites")
   public void actualizarLimites(@RequestBody List<LimiteRacionDTO> limites) {
     for (LimiteRacionDTO dto : limites) {
@@ -68,7 +68,7 @@ public class ConfiguracionController {
     }
   }
 
-  // ✅ Actualizar horario
+  // Actualizar horario
   @PutMapping("/horarios/{id}")
   public Horario actualizarHorario(@PathVariable Long id, @RequestBody HorarioDTO dto) {
     Horario horario = horarioRepo.findById(id).orElseThrow();
